@@ -1,0 +1,68 @@
+//-----------BLYNK--------------------
+
+#include <WiFi.h>
+#include <WiFiClient.h>
+#include <BlynkSimpleEsp32.h>
+
+char auth[] = "kHHrYy6y8UETo7drufQmxjATVWfoBeWQ";
+char ssid[] = "HUAWEI_CUN-L21_EEFC";
+char pass[] = "Vatykan45";
+
+//-------------DHT11-------------------
+
+#include <DHT.h>
+#define DHTPIN 5
+#define DHTTYPE DHT11
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(115200);
+  delay(10);
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+  WiFi.begin(ssid, pass);
+  int wifi_ctr = 0;
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+ Serial.println("WiFi connected"); 
+  Blynk.begin("kHHrYy6y8UETo7drufQmxjATVWfoBeWQ", ssid, pass);
+
+//-----------------DHT11--------------------
+
+  Serial.begin(115200);
+  Serial.println(F("DHTxx test!"));
+
+  dht.begin();
+}
+
+void loop() {
+//----------------DHT11---------------------
+ delay(2000);
+ 
+  float h = dht.readHumidity();
+  float t = dht.readTemperature();
+  float f = dht.readTemperature(true);
+
+   if (isnan(h) || isnan(t) || isnan(f)) {
+    Serial.println(F("Failed to read from DHT sensor!"));
+    return;
+
+float hif = dht.computeHeatIndex(f, h);
+float hic = dht.computeHeatIndex(t, h, false);
+
+  Serial.print(F("Humidity: "));
+  Serial.print(h);
+  Serial.print(F("%  Temperature: "));
+  Serial.print(t);
+  Serial.print(F("°C "));
+  Serial.print(f);
+  Serial.print(F("°F  Heat index: "));
+  Serial.print(hic);
+  Serial.print(F("°C "));
+  Serial.print(hif);
+  Serial.println(F("°F"));
+}
+}
