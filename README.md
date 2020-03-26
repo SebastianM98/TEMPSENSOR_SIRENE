@@ -7,3 +7,9 @@ The BLYNK app is more for the visual, instead of using OLED or LCD or serial mon
 The app that I use for making the code is arduino.
 My micro controller is a ESP32 from JOY-IT.
 It uses WiFi to connect with BLYNK.
+For the tweeter speaker i use the LM386 as an OPAMP filter.
+The tone can be high or low by using the potentio meter.
+
+So now about the working, i have problem that my serial monitor
+shows "Can't read the DHT sensor. I use 3.3V input,
+it can be solved by using 5V or rewiring a bit. 
