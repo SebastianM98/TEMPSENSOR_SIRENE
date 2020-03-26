@@ -13,3 +13,4 @@ The tone can be high or low by using the potentio meter.
 So now about the working, i have problem that my serial monitor
 shows "Can't read the DHT sensor. I use 3.3V input,
 it can be solved by using 5V or rewiring a bit. 
+My DHT is connected on VCC (3.3V), PIN 4 or D4 on the ESP and GND.
